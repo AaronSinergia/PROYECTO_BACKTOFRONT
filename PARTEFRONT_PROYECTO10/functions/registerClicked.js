@@ -1,5 +1,6 @@
 import register from '../pages/body/register/register';
 import returnToLogin from './returnToLogin';
+import '../pages/body/body.css';
 
 const registerClicked = () => {
   const main = document.querySelector('main');

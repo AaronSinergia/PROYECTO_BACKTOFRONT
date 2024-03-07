@@ -16,7 +16,8 @@ label {
   text-align: center;
 }
 
-input {
+#usuario,
+#contraseña {
   padding: 10px;
   margin: 10px;
   border: none;

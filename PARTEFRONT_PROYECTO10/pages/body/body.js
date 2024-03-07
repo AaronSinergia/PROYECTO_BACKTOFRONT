@@ -1,4 +1,4 @@
-import basicAccess from '../../functions/basicAccess';
+import { apiShowAllEvents } from '../../api/apiShowAllEvents';
 import registerClicked from '../../functions/registerClicked';
 import './body.css';
 import login from './login/login';
@@ -16,7 +16,7 @@ const body = () => {
   submitBtn.className = 'submit_btn';
   submitBtn.innerHTML = 'ACCEDER';
 
-  submitBtn.addEventListener('click', () => basicAccess());
+  submitBtn.addEventListener('click', () => apiShowAllEvents());
 
   const registerBtn = document.createElement('button');
   registerBtn.className = 'register_btn';
