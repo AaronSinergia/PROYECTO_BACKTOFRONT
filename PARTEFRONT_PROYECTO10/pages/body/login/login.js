@@ -7,7 +7,7 @@ const login = () => {
     <label>USUARIO</label>
     <input type="text" id='usuario' name='usuario'>
     <label>CONTRASEÑA</label>
-    <input type="text" id='contraseña' name='contraseña'>
+    <input type="password" id='contraseña' name='contraseña'>
     `;
 
   return form;

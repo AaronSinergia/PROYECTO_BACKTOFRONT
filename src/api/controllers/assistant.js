@@ -5,14 +5,12 @@ const bcrypt = require('bcrypt');
 const registerAssistant = async (req, res, next) => {
   try {
     const newAssistant = new Assistant({
-      name: req.body.name,
+      username: req.body.username,
       password: req.body.password,
-      email: req.body.email,
-      eventsAssisted: req.body.eventsAssisted,
     });
 
     const assistantDuplicated = await Assistant.findOne({
-      name: req.body.name,
+      username: req.body.username,
     });
 
     if (assistantDuplicated) {
@@ -29,7 +27,7 @@ const registerAssistant = async (req, res, next) => {
 
 const loginAssistant = async (req, res, next) => {
   try {
-    const assistant = await Assistant.findOne({ name: req.body.name });
+    const assistant = await Assistant.findOne({ username: req.body.username });
 
     if (assistant) {
       if (bcrypt.compareSync(req.body.password, assistant.password)) {

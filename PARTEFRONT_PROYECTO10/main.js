@@ -3,8 +3,9 @@ import body from './pages/body/body';
 import './style.css';
 import footer from './pages/footer/footer';
 
-const appMainBody = () => {
+export const appMainBody = () => {
   const appID = document.querySelector('#app');
+
   const mainHeader = header();
   const mainBody = body();
   const mainFooter = footer();

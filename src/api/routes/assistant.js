@@ -1,4 +1,4 @@
-const { isWorker, isAdmin } = require('../../middlewares/auth');
+const { isAssistant, isAdmin } = require('../../middlewares/auth');
 const {
   registerAssistant,
   loginAssistant,
@@ -10,7 +10,7 @@ const assistantsRoutes = require('express').Router();
 
 assistantsRoutes.post('/register', registerAssistant);
 assistantsRoutes.post('/login', loginAssistant);
-assistantsRoutes.get('/', [isWorker], [isAdmin], getAssistant);
-assistantsRoutes.get('/:id', [isWorker], [isAdmin], getAssistantByID);
+assistantsRoutes.get('/', [isAssistant], [isAdmin], getAssistant);
+assistantsRoutes.get('/:id', [isAssistant], [isAdmin], getAssistantByID);
 
 module.exports = assistantsRoutes;

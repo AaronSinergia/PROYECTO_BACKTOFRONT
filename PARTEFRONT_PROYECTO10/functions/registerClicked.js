@@ -1,6 +1,7 @@
 import register from '../pages/body/register/register';
 import returnToLogin from './returnToLogin';
 import '../pages/body/body.css';
+import { apiRegisterUser } from '../api/apiRegisterUser';
 
 const registerClicked = () => {
   const main = document.querySelector('main');
@@ -14,6 +15,8 @@ const registerClicked = () => {
   const confirmBtn = document.createElement('button');
   confirmBtn.className = 'confirm_btn';
   confirmBtn.innerHTML = 'CONFIRMA EL REGISTRO';
+
+  confirmBtn.addEventListener('click', () => apiRegisterUser());
 
   const submitBtn = document.createElement('button');
   submitBtn.className = 'submit_btn_two';

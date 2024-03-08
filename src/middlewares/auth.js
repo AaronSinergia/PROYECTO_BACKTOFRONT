@@ -1,7 +1,7 @@
 const User = require('../api/models/user');
 const { verifyJWT } = require('../config/jwt');
 
-const isWorker = async (req, res, next) => {
+const isAssistant = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
 
@@ -44,4 +44,4 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { isAdmin, isWorker };
+module.exports = { isAdmin, isAssistant };

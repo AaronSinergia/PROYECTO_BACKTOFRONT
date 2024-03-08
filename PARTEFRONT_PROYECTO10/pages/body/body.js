@@ -1,4 +1,4 @@
-import { apiShowAllEvents } from '../../api/apiShowAllEvents';
+import { apiLoginUser } from '../../api/apiLoginUser';
 import registerClicked from '../../functions/registerClicked';
 import './body.css';
 import login from './login/login';
@@ -16,7 +16,7 @@ const body = () => {
   submitBtn.className = 'submit_btn';
   submitBtn.innerHTML = 'ACCEDER';
 
-  submitBtn.addEventListener('click', () => apiShowAllEvents());
+  submitBtn.addEventListener('click', () => apiLoginUser());
 
   const registerBtn = document.createElement('button');
   registerBtn.className = 'register_btn';
