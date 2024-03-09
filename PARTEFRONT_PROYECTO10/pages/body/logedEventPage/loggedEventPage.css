@@ -12,6 +12,10 @@
   justify-items: center;
 }
 
+.assistants_bbdd {
+  display: none;
+}
+
 .img_bbdd {
   max-width: 200px;
   height: 100%;

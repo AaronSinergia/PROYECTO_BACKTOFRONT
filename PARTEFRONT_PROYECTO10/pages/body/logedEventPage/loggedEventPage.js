@@ -1,3 +1,4 @@
+import apiAttendance from '../../../api/apiAttendance';
 import addNewEventBTN from '../addNewEvent/addNewEventBTN';
 import './loggedEventPage.css';
 
@@ -44,7 +45,7 @@ const loggedEventPage = (events) => {
       assistants.className = 'assistants_bbdd';
 
       const opt = document.createElement('option');
-      opt.innerHTML = element.name;
+      opt.innerHTML = element.username;
 
       assistants.appendChild(opt);
       eventSection.appendChild(assistants);
@@ -60,6 +61,8 @@ const loggedEventPage = (events) => {
     const confirmAssistant = document.createElement('input');
     confirmAssistant.type = 'checkbox';
     confirmAssistant.className = 'confirmAssistant_bbdd';
+
+    confirmAssistant.addEventListener('click', (ev) => apiAttendance(ev));
 
     confirmAssistantBox.appendChild(confirmAssistantText);
     confirmAssistantBox.appendChild(confirmAssistant);

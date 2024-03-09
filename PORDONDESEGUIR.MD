@@ -1,1 +1,5 @@
-TENGO QUE HACER QUE AL ENTRAR CON LOGIN, NO SE VEAN X OPCIONES SI NO TIENE PERMISOS EL USUARIO
+Página de Inicio de Sesión y Registro:
+
+SI NO EXISTE EL USER ALERTA EN PANTALLA
+
+(Tengo que hacer dónde confirme asistencia, que en el backend ese usuario aparezca en el lsitado de "assistants")

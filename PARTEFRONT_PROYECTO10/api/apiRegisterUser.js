@@ -1,5 +1,3 @@
-import { appMainBody } from '../main';
-
 export const apiRegisterUser = async () => {
   const username = document.querySelector('#usuario').value;
   const password = document.querySelector('#contraseña').value;
