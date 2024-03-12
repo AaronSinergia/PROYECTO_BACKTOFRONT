@@ -15,8 +15,8 @@ export const apiRegisterUser = async () => {
     }),
   });
 
-  // const dataRes = await dataRegister.json();
-  // localStorage.setItem('user', JSON.stringify(dataRes));
+  const dataRes = await dataRegister.json();
+  localStorage.setItem('user', JSON.stringify(dataRes));
 
   if (dataRegister.status === 400) {
     alert(

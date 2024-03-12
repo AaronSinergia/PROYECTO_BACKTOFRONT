@@ -1,17 +1,17 @@
 import { apiShowAllEvents } from './apiShowAllEvents';
 
-const waitForElement = async (selector) => {
+const waitForElements = async (selector) => {
   return new Promise((resolve) => {
-    const checkElement = () => {
-      const element = document.querySelector(selector);
-      if (element) {
-        resolve(element);
+    const checkElements = () => {
+      const elements = document.querySelectorAll(selector);
+      if (elements.length > 0) {
+        resolve(elements);
       } else {
-        requestAnimationFrame(checkElement);
+        requestAnimationFrame(checkElements);
       }
     };
 
-    checkElement();
+    checkElements();
   });
 }; // Esto lo he sacado de CHAT GPT, tras buscar la forma de poner el elemento en display flex y no encontrarla
 
@@ -21,29 +21,41 @@ export const apiLoginUser = async () => {
 
   const apiUrlLogin = 'http://localhost:3000/api/auth/login';
 
-  const dataLogin = await fetch(apiUrlLogin, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  });
+  try {
+    const dataLogin = await fetch(apiUrlLogin, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
 
-  const dataRes = await dataLogin.json();
-  localStorage.setItem('id', dataRes.assistant._id);
+    const dataRes = await dataLogin.json();
+    localStorage.setItem('id', dataRes.assistant._id);
 
-  if (dataLogin.status === 400) {
-    alert('El usuario o contraseña no existen');
-  } else {
-    alert(`Bienvenido ${username}`);
-    apiShowAllEvents();
+    if (dataLogin.status === 400) {
+      alert('El usuario o contraseña no existen');
+    } else {
+      alert(`Bienvenido ${username}`);
+      apiShowAllEvents();
 
-    if (username === 'AaronSinergia' && dataLogin.status === 200) {
-      const targetElement = await waitForElement('.assistants_bbdd');
-      targetElement.style.display = 'flex';
+      if (username === 'AaronSinergia' && dataLogin.status === 200) {
+        alert('Te has logado con usuario ADMIN');
+
+        const targetElementInput = await waitForElements('.assistants_bbdd');
+
+        for (const inputElement of targetElementInput) {
+          inputElement.style.display = 'flex';
+        }
+      } else {
+        const targetElementBTN = await waitForElement('.new_event_btn');
+        targetElementBTN.remove();
+      }
     }
+  } catch (error) {
+    console.error('Error en la solicitud:', error);
   }
 };

@@ -1,3 +1,4 @@
+import { apiCreateNewEv } from '../../../../api/apiCreateNewEv';
 import './newEventForm.css';
 
 const newEventForm = () => {
@@ -12,7 +13,7 @@ const newEventForm = () => {
 
   <label for="archivo">Sube una Imagen:</label>
 
-  <input type="file" name="archivo" id="archivo" accept=".jpg, .jpeg, .png, .gif" required>
+  <input type="text" name="archivo" id="archivo" accept=".jpg, .jpeg, .png, .gif">
 
   <label for="titulo">Título del Evento:</label>
 
@@ -27,13 +28,21 @@ const newEventForm = () => {
   <input type="text" name="lugar" id="lugar" required>
 
   <label for="descripcion">Descripción del Evento:</label>
+  
 
   <textarea name="descripcion" id="descripcion" rows="4" required></textarea>
 
-  <input type="submit" value="AÑADIR NUEVO EVENTO">
+
 </form>
     `;
 
+  const btnForm = document.createElement('button');
+  btnForm.className = 'submit';
+  btnForm.innerHTML = 'AÑADIR NUEVO EVENTO';
+
+  btnForm.addEventListener('click', apiCreateNewEv);
+
+  newForm.appendChild(btnForm);
   main.appendChild(newForm);
 };
 

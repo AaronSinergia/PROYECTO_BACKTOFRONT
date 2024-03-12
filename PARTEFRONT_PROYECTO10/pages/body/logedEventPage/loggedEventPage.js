@@ -39,16 +39,16 @@ const loggedEventPage = (events) => {
     description.className = 'description_bbdd';
     description.innerHTML = data.description;
 
+    const assistants = document.createElement('select');
+    assistants.className = 'assistants_bbdd';
+
     for (const key in data.assistants) {
       const element = data.assistants[key];
-      const assistants = document.createElement('select');
-      assistants.className = 'assistants_bbdd';
 
       const opt = document.createElement('option');
       opt.innerHTML = element.username;
 
       assistants.appendChild(opt);
-      eventSection.appendChild(assistants);
     }
 
     const confirmAssistantBox = document.createElement('div');
@@ -62,7 +62,15 @@ const loggedEventPage = (events) => {
     confirmAssistant.type = 'checkbox';
     confirmAssistant.className = data._id;
 
-    confirmAssistant.addEventListener('click', (ev) => apiAttendance(ev));
+    confirmAssistant.addEventListener('click', (ev) => {
+      apiAttendance(ev);
+
+      confirmAssistant.remove();
+      confirmAssistantText.innerText = 'ASISTIRÁS A ESTE EVENTO';
+      confirmAssistantText.style.color = 'red';
+    });
+
+    eventSection.appendChild(assistants);
 
     confirmAssistantBox.appendChild(confirmAssistantText);
     confirmAssistantBox.appendChild(confirmAssistant);
