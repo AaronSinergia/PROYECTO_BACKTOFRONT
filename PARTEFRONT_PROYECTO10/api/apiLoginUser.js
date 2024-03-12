@@ -19,7 +19,7 @@ export const apiLoginUser = async () => {
   const username = document.querySelector('#usuario').value;
   const password = document.querySelector('#contraseña').value;
 
-  const apiUrlLogin = 'http://localhost:3000/api/assistants/login';
+  const apiUrlLogin = 'http://localhost:3000/api/auth/login';
 
   const dataLogin = await fetch(apiUrlLogin, {
     headers: {
@@ -33,7 +33,7 @@ export const apiLoginUser = async () => {
   });
 
   const dataRes = await dataLogin.json();
-  localStorage.setItem('user', JSON.stringify(dataRes));
+  localStorage.setItem('id', dataRes.assistant._id);
 
   if (dataLogin.status === 400) {
     alert('El usuario o contraseña no existen');

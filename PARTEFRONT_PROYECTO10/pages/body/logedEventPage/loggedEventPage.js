@@ -60,7 +60,7 @@ const loggedEventPage = (events) => {
 
     const confirmAssistant = document.createElement('input');
     confirmAssistant.type = 'checkbox';
-    confirmAssistant.className = 'confirmAssistant_bbdd';
+    confirmAssistant.className = data._id;
 
     confirmAssistant.addEventListener('click', (ev) => apiAttendance(ev));
 

@@ -1,4 +1,5 @@
 const { deleteFile } = require('../../utils/deleteFile');
+const Assistant = require('../models/assistant');
 const Event = require('../models/event');
 
 const getEvents = async (req, res, next) => {
@@ -53,6 +54,33 @@ const modifyEvent = async (req, res, next) => {
   }
 };
 
+const addAssistantToEvent = async (req, res, next) => {
+  try {
+    const { id } = req.params; // id del evento
+    const userID = req.body.assistants;
+
+    const event = await Event.findOne({
+      _id: id,
+      assistants: userID,
+    });
+
+    if (event) {
+      alert('El usuario ya está como asistente al evento');
+    } else {
+      const eventUpdated = await Event.findByIdAndUpdate(
+        id,
+        {
+          $push: { assistants: userID },
+        },
+        { new: true }
+      );
+      return res.status(200).json(eventUpdated);
+    }
+  } catch (error) {
+    return res.status(400).json('Ha fallado la petición');
+  }
+};
+
 const deleteEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -69,11 +97,33 @@ const deleteEvent = async (req, res, next) => {
   }
 };
 
-const getEventsByID = async (req, res, next) => {
-  const { id } = req.params;
+// const getEventsByUSERID = async (req, res, next) => {
+//   const { id } = req.params;
+//   try {
+//     const assistant = await Assistant.findById(id);
+//     const events = await Event.findById(id);
+
+//     return res.status(200).json(events);
+//   } catch (error) {
+//     return res.status(400).json(error);
+//   }
+// };
+
+const getEventsByUSERID = async (req, res, next) => {
+  const { id, userID } = req.params;
+
   try {
-    const events = await Event.findById(id);
-    return res.status(200).json(events);
+    const event = await Event.findOne({
+      _id: id,
+      assistants: userID,
+    });
+
+    if (event) {
+      return res.status(200).json({ isUserInEvent: true });
+    } else {
+      // El usuario no está en la lista de asistentes del evento
+      return res.status(200).json({ isUserInEvent: false });
+    }
   } catch (error) {
     return res.status(400).json(error);
   }
@@ -83,6 +133,7 @@ module.exports = {
   getEvents,
   postNewEvent,
   deleteEvent,
-  getEventsByID,
+  getEventsByUSERID,
   modifyEvent,
+  addAssistantToEvent,
 };
