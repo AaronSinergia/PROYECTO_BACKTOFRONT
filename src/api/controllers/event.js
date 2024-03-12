@@ -13,11 +13,7 @@ const getEvents = async (req, res, next) => {
 
 const postNewEvent = async (req, res, next) => {
   try {
-    const newEvent = new Event(req.body).populate('resurrectionAssistant');
-
-    if (req.files) {
-      newEvent.img = req.files.img[0].path;
-    }
+    const newEvent = new Event(req.body);
 
     const eventDuplicated = await Event.findOne({
       title: req.body.title,
